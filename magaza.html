@@ -169,15 +169,13 @@
   <!-- app.js sadece 1 kere -->
   <script src="./config.js?v=3300"></script>
 
-  <script defer="" src="./app.js?v=3300"></script>
+<script src="./config.js?v=3300"></script>
+
 <script type="module">
   import { supabase } from "./assets/js/supabaseClient.js";
-
-  // Console’dan da erişelim diye:
   window.sb = supabase;
-
-  const { data, error } = await supabase.from("products").select("*").limit(5);
-  console.log("products first 5:", { data, error });
 </script>
+
+<script defer src="./app.js?v=3301"></script>
 </body>
 </html>
