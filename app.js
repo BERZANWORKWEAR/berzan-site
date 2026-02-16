@@ -955,7 +955,7 @@ function initShopPage(){
     render(items);
 
     const baseTitle = BERZAN_CATEGORIES[activeCat] || 'Ürünler';
-    if (rightTitle) rightTitle.textContent = baseTitle;
+   if (rightTitle) rightTitle.textContent = baseTitle;
 
     const parts = [];
     if (activeSeason) parts.push(`Sezon: ${seasonLabel()}`);
