@@ -170,12 +170,11 @@
   <script src="./config.js?v=3300"></script>
 
   <script defer="" src="./app.js?v=3300"></script>
- <script type="module">
+<script type="module">
   import { supabase } from "./assets/js/supabaseClient.js";
 
   const { data, error } = await supabase.from("products").select("id").limit(1);
   console.log("supabase test:", { data, error });
 </script>
-
 </body>
 </html>
