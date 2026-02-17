@@ -2622,3 +2622,106 @@ body.urun-page #quoteBtn{display:none !important}
 /* Final: keep containers wide on desktop */
 @media (min-width:1400px){ .container{max-width:1600px;} }
 @media (min-width:1700px){ .container{max-width:1760px;} }
+/* =========================================================
+   BERZAN — Homepage card section width fix (full-bleed feel)
+   Paste this at the VERY END of your current styles.css
+   (or keep as separate file and include after styles.css)
+   ========================================================= */
+
+/* 1) Make the global wrapper/container use nearly full viewport width on desktop */
+:root{
+  --wrap-max: 1400px;
+  --wrap-max-xl: 1560px;
+  --wrap-gutter: 48px;
+  --wrap-gutter-sm: 24px;
+}
+
+/* If your project uses .container, this is the main limiter on big screens */
+.container{
+  max-width: var(--wrap-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: calc(var(--wrap-gutter) / 2);
+  padding-right: calc(var(--wrap-gutter) / 2);
+}
+
+/* Desktop: widen container hard (close to edge, still a little breathing room) */
+@media (min-width: 1100px){
+  .container{
+    max-width: 1560px;            /* was feeling "tiny" on PC */
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* Big desktop / ultrawide: go even wider but never overflow viewport */
+@media (min-width: 1600px){
+  .container{
+    max-width: calc(100vw - 64px); /* 32px left + 32px right */
+  }
+}
+
+/* 2) Cards grids often have their own wrapper. These common class names get widened too. */
+.home-cards,
+.cards,
+.cards-wrap,
+.cards-grid,
+.grid,
+.product-grid,
+.products-grid,
+.section-grid{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 1100px){
+  .home-cards,
+  .cards,
+  .cards-wrap,
+  .cards-grid,
+  .grid,
+  .product-grid,
+  .products-grid,
+  .section-grid{
+    max-width: 1560px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (min-width: 1600px){
+  .home-cards,
+  .cards,
+  .cards-wrap,
+  .cards-grid,
+  .grid,
+  .product-grid,
+  .products-grid,
+  .section-grid{
+    max-width: calc(100vw - 64px);
+  }
+}
+
+/* 3) Keep square cards square even when expanding */
+.card,
+.product-card,
+.tile,
+.square-card{
+  aspect-ratio: auto;
+}
+.square,
+.is-square,
+.square-card{
+  aspect-ratio: 1 / 1;            /* prevents stretching */
+}
+
+/* 4) Images stay nice when cards grow */
+.card img,
+.product-card img,
+.tile img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
