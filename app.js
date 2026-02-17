@@ -634,11 +634,111 @@ document.addEventListener('click', (e) => {
    5) SHOP PAGE (Mağaza)
 ========================= */
 
-function initShopPage(){
+
+// =========================
+// Supabase helpers
+// =========================
+function berzanLooksUUID(v){
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(v||''));
+}
+
+async function berzanLoadSupabaseProducts(){
+  const sb = window.sb;
+  if (!sb || !sb.from) return [];
+
+  const catMap = new Map();
+  try{
+    const { data: cats, error: catsErr } = await sb.from('categories').select('id,slug');
+    if (!catsErr && Array.isArray(cats))
+      cats.forEach(c => catMap.set(c.id, (c.slug||'').toLowerCase()));
+  }catch(e){}
+
+  const { data: rows, error } = await sb
+    .from('products')
+    .select('id,slug,name,short_desc,description,price_try,cover_image_url,category_id,is_active,sort')
+    .eq('is_active', true)
+    .order('sort', { ascending: true })
+    .limit(200);
+
+  if (error || !Array.isArray(rows)) return [];
+
+  return rows.map(r => ({
+    __source: 'supabase',
+    id: r.id,
+    slug: (r.slug||'').toLowerCase(),
+    name: r.name || 'Ürün',
+    mini: r.short_desc || '',
+    desc: r.description || r.short_desc || '',
+    retail: Number(r.price_try)||0,
+    colors: [],
+    cover: r.cover_image_url || '',
+    cat: catMap.get(r.category_id) || 'mont',
+    seasons: [],
+    sectors: [],
+    badge: null,
+    rating: null,
+  }));
+}
+
+async function berzanLoadSupabaseProduct(idOrSlug){
+  const sb = window.sb;
+  if (!sb || !sb.from) return null;
+
+  const isId = berzanLooksUUID(idOrSlug);
+  const q = sb
+    .from('products')
+    .select('id,slug,name,short_desc,description,price_try,cover_image_url,category_id,is_active')
+    .limit(1);
+
+  const { data: row, error } = isId
+    ? await q.eq('id', idOrSlug).maybeSingle()
+    : await q.eq('slug', String(idOrSlug||'').toLowerCase()).maybeSingle();
+
+  if (error || !row) return null;
+
+  let catSlug = 'mont';
+  try{
+    if (row.category_id){
+      const { data: cRow } = await sb.from('categories').select('slug').eq('id', row.category_id).maybeSingle();
+      if (cRow?.slug) catSlug = String(cRow.slug).toLowerCase();
+    }
+  }catch(e){}
+
+  return {
+    __source: 'supabase',
+    id: row.id,
+    slug: (row.slug||'').toLowerCase(),
+    name: row.name || 'Ürün',
+    mini: row.short_desc || '',
+    desc: row.description || row.short_desc || '',
+    retail: Number(row.price_try)||0,
+    colors: [],
+    cover: row.cover_image_url || '',
+    cat: catSlug,
+    seasons: [],
+    sectors: [],
+    badge: null,
+    rating: null,
+  };
+}
+
+async function initShopPage(){
   if (!(document.body.classList.contains('magaza-page') || document.body.classList.contains('urunler-page'))) return;
 
   const grid = document.getElementById('productsGrid');
   const catBtns = Array.from(document.querySelectorAll('.cat-item'));
+
+  let PRODUCTS = BERZAN_CATALOG;
+  try{
+    const live = await berzanLoadSupabaseProducts();
+    if (Array.isArray(live) && live.length){
+      PRODUCTS = live;
+      window.__LIVE_PRODUCTS__ = live;
+    }
+  }catch(e){
+    console.warn("[Supabase] products load failed", e);
+  }
+
   const tabs = Array.from(document.querySelectorAll('.season-tab'));
   const indicator = document.getElementById('seasonIndicator');
   const seasonTabs = document.getElementById('seasonTabs');
@@ -735,9 +835,11 @@ function initShopPage(){
   })();
   function matchSeason(p){
     if (!activeSeason) return true;
-    return (p.seasons || []).includes(activeSeason);
+    const seasons = p.seasons || [];
+    if (!seasons.length) return true;
+    return seasons.includes(activeSeason);
   }
-  function matchQuery(p){
+function matchQuery(p){
     if (!query) return true;
     const hay = `${p.name} ${p.desc || ''} ${(p.badges||[]).join(' ')} ${(p.sectors||[]).join(' ')} ${(p.seasons||[]).join(' ')}`.toLowerCase();
     return hay.includes(query);
@@ -812,8 +914,8 @@ function initShopPage(){
   }
 
   function applyAll(){
-    const items = BERZAN_CATALOG
-      .filter(p => p.cat === activeCat)
+    const items = PRODUCTS
+      .filter(p => (activeCat === 'tümü') ? true : p.cat === activeCat)
       .filter(matchSector)
       .filter(matchSeason)
       .filter(matchQuery);
@@ -913,7 +1015,7 @@ initShopPage();
 /* =========================
    6) PRODUCT PAGE (urun.html)
 ========================= */
-function initProductPage(){
+async function initProductPage(){
   if (!document.body.classList.contains('urun-page')) return;
 
   const params = new URLSearchParams(location.search);
