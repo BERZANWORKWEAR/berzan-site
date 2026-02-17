@@ -362,9 +362,14 @@ strong, .btn, .nav, .icon-btn{ font-weight: 600; }
 
 /* hero tamamen görsel olsun */
 .hero-photo{
-  background: linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.20)), var(--hero-bg);
-  background-size: cover;
-  background-position: center;
+  /* Üst: karartma, orta: görsel TAM (contain), alt: boşluk doldur (cover) */
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.25)),
+    var(--hero-bg) center / contain no-repeat,
+    var(--hero-bg) center / cover no-repeat;
+  background-color:#000;
+  /* Bir tık daha yüksek: kırpılma azalır */
+  min-height: clamp(620px, 82vh, 980px);
 }
 .hero-photo::before{ opacity: 0; } /* glow kapat */
 .hero-photo .hero-copy{ color:#fff; }
