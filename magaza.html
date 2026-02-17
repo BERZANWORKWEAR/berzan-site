@@ -1,108 +1,243 @@
 <!doctype html>
 <html lang="tr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mağaza — BERZAN</title>
-  <meta name="description" content="BERZAN iş giyim ürünleri mağazası" />
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Mağaza — BERZAN
+  </title>
+  <link href="./styles.css?v=3300" rel="stylesheet"/>
+  <meta content="BERZAN ürünleri: mont, parka, yelek, tulum ve KKD. Saha koşullarına uygun, premium dayanım ve görünürlük." name="description"/>
+  <meta content="index,follow" name="robots"/>
+  <meta content="#131D2E" name="theme-color"/>
+  <meta content="light dark" name="color-scheme"/>
+  <link href="https://berzan.com.tr/magaza.html" rel="canonical"/>
+  <link href="./images/favicon.ico" rel="icon" sizes="any"/>
+  <link href="./images/logo.svg" rel="icon" type="image/svg+xml"/>
+  <link href="./images/favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+  <link href="./images/favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
+  <link href="./images/apple-touch-icon.png" rel="apple-touch-icon"/>
+  <link href="./site.webmanifest" rel="manifest"/>
+  <link as="font" crossorigin="" href="./fonts/MiSansLatin-Regular.woff2" rel="preload" type="font/woff2"/>
+  <link as="font" crossorigin="" href="./fonts/MiSansLatin-Semibold.woff2" rel="preload" type="font/woff2"/>
+  <meta content="tr_TR" property="og:locale"/>
+  <meta content="website" property="og:type"/>
+  <meta content="BERZAN" property="og:site_name"/>
+  <meta content="Mağaza — BERZAN" property="og:title"/>
+  <meta content="BERZAN ürünleri: mont, parka, yelek, tulum ve KKD. Saha koşullarına uygun, premium dayanım ve görünürlük." property="og:description"/>
+  <meta content="https://berzan.com.tr/magaza.html" property="og:url"/>
+  <meta content="https://berzan.com.tr/images/og-berzan.jpg" property="og:image"/>
+  <meta content="1200" property="og:image:width"/>
+  <meta content="630" property="og:image:height"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="Mağaza — BERZAN" name="twitter:title"/>
+  <meta content="BERZAN ürünleri: mont, parka, yelek, tulum ve KKD. Saha koşullarına uygun, premium dayanım ve görünürlük." name="twitter:description"/>
+  <meta content="https://berzan.com.tr/images/og-berzan.jpg" name="twitter:image"/>
+ </head>
 
-  <!-- Site geneli stiller -->
-  <link rel="stylesheet" href="./styles.css" />
+<body class="magaza-page">
+ <header class="nav">
+  <div class="container nav-inner">
+   <a aria-label="BERZAN" class="brand" href="./index.html">
+    <img alt="BERZAN" class="brand-logo" decoding="async" src="./images/logo.svg"/>
+   </a>
+   <nav class="nav-links">
+    <a href="./index.html">Ana Sayfa</a>
+    <a class="active" href="./magaza.html">Mağaza</a>
+   </nav>
+   <div class="nav-actions">
+    <button class="icon-btn" id="openSearch" type="button" aria-label="Ara">Ara</button>
+   </div>
+  </div>
+ </header>
 
-  <!-- Bu sayfa için min patch (styles.css bozulsa bile UI dağılmasın) -->
-  <style>
-    :root{--wrap-max:1400px;--gutter:28px}
-    .wrap{max-width:var(--wrap-max);margin:0 auto;padding:0 var(--gutter)}
+ <section class="section page-fill store-section">
+  <div class="container">
+   <div class="catbar-wrap reveal">
+    <div class="catbar" aria-label="Kategoriler">
+     <button class="cat-item is-active" data-cat="mont" type="button">
+      <span class="cat-ico" aria-hidden="true">
+       <svg viewBox="0 0 24 24" fill="none"><path d="M7 8c.4-2.5 2.6-4 5-4s4.6 1.5 5 4l1 7c.2 1.8-1.2 3-3 3H9c-1.8 0-3.2-1.2-3-3l1-7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 10v10M15 10v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
+      <span class="cat-txt">Mont</span>
+     </button>
 
-    /* Header */
-    .shop-top{position:sticky;top:0;background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid rgba(0,0,0,.06);z-index:50}
-    .shop-top .bar{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:16px}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.12em}
-    .brand img{width:24px;height:24px;object-fit:contain}
+     <button class="cat-item" data-cat="ust" type="button">
+      <span class="cat-ico" aria-hidden="true">
+       <svg viewBox="0 0 24 24" fill="none"><path d="M8 8 12 5l4 3 2 2-2 3v8H8v-8L6 10l2-2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 21v-8h4v8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="cat-txt">Üst</span>
+     </button>
 
-    .top-actions{display:flex;align-items:center;gap:10px}
-    .top-actions a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.08);background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.06);font-weight:600}
-    .top-actions .badge{min-width:22px;height:22px;border-radius:999px;background:#FFE27A;color:#111;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
+     <button class="cat-item" data-cat="pantolon" type="button">
+      <span class="cat-ico" aria-hidden="true">
+       <svg viewBox="0 0 24 24" fill="none"><path d="M8 4h8l-1 16-3-3-3 3L8 4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="cat-txt">Pantolon</span>
+     </button>
 
-    /* Kategori pill row */
-    .pill-row{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:14px 0 18px}
-    .pill{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.08);background:#fff;cursor:pointer;user-select:none;font-weight:700}
-    .pill.active{border-color:rgba(255,215,0,.65);box-shadow:0 10px 24px rgba(255,215,0,.18)}
+     <button class="cat-item" data-cat="yelek" type="button">
+      <span class="cat-ico" aria-hidden="true">
+       <svg viewBox="0 0 24 24" fill="none"><path d="M9 4h6l2 5-2 12H9L7 9l2-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 4v17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
+      <span class="cat-txt">Yelek</span>
+     </button>
 
-    /* Sezon chip row */
-    .chip-row{display:flex;justify-content:center;gap:10px;padding:8px 0 18px}
-    .chip{padding:10px 16px;border-radius:999px;border:1px solid rgba(0,0,0,.08);background:#fff;font-weight:700;cursor:pointer}
-    .chip.active{background:rgba(255,215,0,.18);border-color:rgba(255,215,0,.55)}
+     <button class="cat-item" data-cat="tulum" type="button">
+      <span class="cat-ico" aria-hidden="true">
+       <svg viewBox="0 0 24 24" fill="none"><path d="M9 4h6l1 6v11h-4v-6h-2v6H8V10l1-6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="cat-txt">Tulum</span>
+     </button>
 
-    /* Grid */
-    .grid-wrap{padding:22px 0 40px}
-    .products-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-    @media (max-width:1100px){.products-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
-    @media (max-width:820px){.products-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
-    @media (max-width:520px){.products-grid{grid-template-columns:1fr;}.wrap{padding:0 18px}}
+     <button class="cat-item" data-cat="ayakkabi" type="button">
+      <span class="cat-ico" aria-hidden="true">
+       <svg viewBox="0 0 24 24" fill="none"><path d="M4 16c4 0 6-4 8-4 2 0 3 2 5 2 2 0 3-1 3-1v4H4v-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l-2-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
+      <span class="cat-txt">Ayakkabı</span>
+     </button>
 
-    /* Kart (app.js içinden geliyor ama fall-back ile güzel dursun) */
-    .p-card{border-radius:22px;overflow:hidden;background:#fff;border:1px solid rgba(0,0,0,.08);box-shadow:0 14px 34px rgba(0,0,0,.08)}
-    .p-media{aspect-ratio:4/3;background:#f5f5f7;display:flex;align-items:center;justify-content:center}
-    .p-media img{width:100%;height:100%;object-fit:cover}
-    .p-body{padding:14px 14px 16px;display:flex;flex-direction:column;gap:10px}
-    .p-title{font-weight:800;letter-spacing:.01em}
-    .p-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .p-price{font-weight:900}
-    .p-btn{padding:10px 14px;border-radius:999px;background:#131D2E;color:#fff;font-weight:800;border:none;cursor:pointer}
+     <button class="cat-item" data-cat="kkd" type="button">
+      <span class="cat-ico" aria-hidden="true">
+       <svg viewBox="0 0 24 24" fill="none"><path d="M7 9c0-3 2-5 5-5s5 2 5 5v3c0 3-2 8-5 8s-5-5-5-8V9Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 10h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
+      <span class="cat-txt">KKD</span>
+     </button>
 
-    /* States */
-    .empty-state{padding:54px 0;text-align:center;color:rgba(0,0,0,.65)}
-    .empty-state strong{display:block;color:#111;font-size:18px;margin-bottom:6px}
-    .error-box{margin:16px auto 0;max-width:980px;background:#fff3f3;border:1px solid rgba(255,0,0,.18);color:#8b0000;border-radius:16px;padding:12px 14px;display:none}
-  </style>
-</head>
-
-<body>
-  <header class="shop-top">
-    <div class="wrap">
-      <div class="bar">
-        <a class="brand" href="./index.html" aria-label="BERZAN ana sayfa">
-          <span>BERZAN</span>
-        </a>
-
-        <nav class="top-actions" aria-label="Hızlı işlemler">
-          <a href="#" id="openSearch"><span>Ara</span></a>
-          <a href="#" id="openCart"><span>Sepet</span> <span class="badge" id="cartCount">0</span></a>
-        </nav>
-      </div>
-
-      <!-- Kategoriler (app.js buraya dolduracak) -->
-      <div id="categoryPills" class="pill-row" aria-label="Kategoriler"></div>
-
-      <!-- Sezon filtreleri (app.js dinleyecek) -->
-      <div class="chip-row" aria-label="Sezon filtreleri">
-        <button class="chip active" data-season="all" type="button">Tümü</button>
-        <button class="chip" data-season="summer" type="button">Yazlık</button>
-        <button class="chip" data-season="winter" type="button">Kışlık</button>
-        <button class="chip" data-season="season" type="button">Sezonluk</button>
-      </div>
-
-      <div id="errorBox" class="error-box"></div>
+     <button class="cat-item" data-cat="aksesuar" type="button">
+      <span class="cat-ico" aria-hidden="true">
+       <svg viewBox="0 0 24 24" fill="none"><path d="M7 10a5 5 0 1 1 10 0v5a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3v-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
+      <span class="cat-txt">Aksesuar</span>
+     </button>
     </div>
-  </header>
+   </div>
 
-  <main class="wrap grid-wrap">
-    <section class="products" aria-label="Ürünler">
-      <div id="grid" class="products-grid"></div>
+   <div class="season-wrap reveal">
+    <div class="season-tabs" id="seasonTabs">
+     <div aria-hidden="true" class="season-indicator" id="seasonIndicator"></div>
+     <button class="season-tab" data-season="" type="button">Tümü</button>
+     <button class="season-tab" data-season="yazlik" type="button">Yazlık</button>
+     <button class="season-tab" data-season="kislik" type="button">Kışlık</button>
+     <button class="season-tab" data-season="sezonluk" type="button">Sezonluk</button>
+    </div>
+   </div>
 
-      <div id="empty" class="empty-state" style="display:none">
-        <strong>Ürün bulunamadı</strong>
-        Filtreleri değiştirip tekrar dene.
-      </div>
-    </section>
-  </main>
+   <div class="store-head reveal">
+     <div class="store-head-left"></div>
+     <div class="shop-sort-wrap shop-sort-wrap--head">
+      <span class="shop-sort-label">Sırala</span>
+      <select aria-label="Sıralama" class="shop-sort" id="shopSort">
+       <option value="pop">Önerilen</option>
+       <option value="price-asc">Fiyat (artan)</option>
+       <option value="price-desc">Fiyat (azalan)</option>
+       <option value="name">İsim</option>
+      </select>
+     </div>
+   </div>
 
-  <!-- Arama paneli (istersen sonra bağlarız, şimdilik UI dursun) -->
-  <div class="backdrop" id="searchBackdrop" hidden></div>
+   <div class="products-filters reveal" id="productsFilters" style="display:none;"></div>
 
-  <!-- Supabase config + app -->
-  <script src="./config.js?v=3301"></script>
-  <script defer src="./app.js?v=3301"></script>
-</body>
+   <div class="products-grid shop-grid store-grid reveal" id="productsGrid"></div>
+
+   <div class="empty-state" id="emptyState" style="display:none;">
+    <div class="empty-title">Bu kombinasyonda ürün görünmüyor.</div>
+    <div class="empty-sub">Filtreleri değiştir veya farklı kategori dene.</div>
+    <div class="empty-actions">
+     <a class="btn primary" href="./magaza.html">Tümü</a>
+     <a class="btn" href="./uzman.html">Uzmanla Görüş</a>
+    </div>
+   </div>
+
+   <div class="store-feature reveal">
+    <div class="feature-head">
+     <div class="feature-title">Temel ürünler</div>
+     <div class="feature-sub">Sahada en çok kullanılan parçalar — sade, net, kurumsal çizgi.</div>
+    </div>
+    <div class="feature-grid">
+     <a class="feature-card" href="./urun.html?urun=mont">
+      <div class="feature-media"><div class="shop-ph">Mont</div></div>
+      <div class="feature-name">Saha Montu</div>
+      <div class="feature-desc">Dayanım + konfor. Kurumsal görünüm.</div>
+     </a>
+     <a class="feature-card" href="./urun.html?urun=polo-tisort">
+      <div class="feature-media"><div class="shop-ph">Polo</div></div>
+      <div class="feature-name">Polo Tişört</div>
+      <div class="feature-desc">Nefes alan kumaş, temiz çizgi.</div>
+     </a>
+     <a class="feature-card" href="./urun.html?urun=baret">
+      <div class="feature-media"><div class="shop-ph">KKD</div></div>
+      <div class="feature-name">Baret</div>
+      <div class="feature-desc">Güvenlik standardı, sahaya hazır.</div>
+     </a>
+    </div>
+   </div>
+
+  </div>
+ </section>
+
+ <!-- SEKTÖR SEÇİMİ (opsiyonel) -->
+ <div class="backdrop" id="sectorBackdrop" aria-hidden="true"></div>
+ <div class="sector-modal" id="sectorModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Sektör seçimi">
+  <div class="sector-modal-inner">
+   <div class="sector-modal-top">
+    <div class="sector-modal-title">Sana en uygun ürünü bulalım mı?</div>
+    <div class="sector-modal-sub">İstersen sektör seçerek ürünleri filtreleriz. İstemiyorsan devam et — özgürsün.</div>
+   </div>
+   <div class="sector-pills" id="sectorPills"></div>
+   <div class="sector-modal-actions">
+    <button class="btn" id="sectorSkip" type="button">Şimdilik geç</button>
+    <button class="btn primary" id="sectorAll" type="button">Tüm ürünler</button>
+   </div>
+  </div>
+ </div>
+
+
+<footer class="footer">
+   <div class="container">
+    <p>
+     © 2026 BERZAN
+    </p>
+    <p style="margin-top:8px;opacity:.85">
+     <a href="./kvkk.html">
+      KVKK
+     </a>
+     •
+     <a href="./cerez-politikasi.html">
+      Çerez Politikası
+     </a>
+    </p>
+   </div>
+  </footer>
+  <!-- SEARCH -->
+  <div class="backdrop" id="searchBackdrop">
+  </div>
+  <div aria-hidden="true" class="search-sheet" id="searchSheet">
+   <div class="search-row">
+    <div class="search-input">
+     <input id="siteSearchInput" placeholder="Ara: mont, pantolon, yelek…"/>
+    </div>
+    <button class="btn" id="closeSearch" type="button">
+     Kapat
+    </button>
+   </div>
+  </div>
+  <!-- app.js sadece 1 kere -->
+  <script src="./config.js?v=3300"></script>
+
+  <!-- Supabase (opsiyonel): config.js içinde window.__SUPABASE__ { url, anonKey } varsa mağaza canlı ürünleri çeker -->
+  <script type="module">
+   try {
+     const cfg = window.__SUPABASE__ || {};
+     if (cfg.url && cfg.anonKey) {
+       const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+       window.sb = createClient(cfg.url, cfg.anonKey, { auth: { persistSession: false } });
+     }
+   } catch (e) {
+     console.warn('[Supabase] init failed', e);
+   }
+  </script>
+
+  <script defer="" src="./app.js?v=3300"></script>
+ </body>
 </html>
