@@ -359,6 +359,17 @@ strong, .btn, .nav, .icon-btn{ font-weight: 600; }
     radial-gradient(84vmax 48vmax at 18% 10%, rgba(255,255,255,.48), transparent 62%),
     radial-gradient(66vmax 38vmax at 82% 28%, rgba(0,0,0,.12), transparent 66%);
   opacity: 1;
+
+/* hero tamamen görsel olsun */
+.hero-photo{
+  background: linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.20)), var(--hero-bg);
+  background-size: cover;
+  background-position: center;
+}
+.hero-photo::before{ opacity: 0; } /* glow kapat */
+.hero-photo .hero-copy{ color:#fff; }
+.hero-photo .hero-copy p{ color: rgba(255,255,255,.85); }
+
 }
 
 /* (ekstra) micro shimmer — hafif, performans dostu */

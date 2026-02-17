@@ -930,7 +930,7 @@ function matchQuery(p){
     render(items);
 
     const baseTitle = BERZAN_CATEGORIES[activeCat] || 'Ürünler';
-    rightTitle.textContent = baseTitle;
+  if (rightTitle) rightTitle.textContent = baseTitle;
 
     const parts = [];
     if (activeSeason) parts.push(`Sezon: ${seasonLabel()}`);
@@ -969,7 +969,7 @@ function matchQuery(p){
     btn.addEventListener('click', () => {
       activeSeason = btn.dataset.season || '';
       moveIndicatorTo(btn);
-      pickFirstNonEmptyCat();
+    applyAll(); // sezon değişince kategori sabit kalsın
     });
   });
 
@@ -981,7 +981,7 @@ function matchQuery(p){
     if (query) url.searchParams.set('q', query);
     else url.searchParams.delete('q');
     history.replaceState({}, '', url.toString());
-    pickFirstNonEmptyCat();
+    applyAll(); // URL season değişince kategori sabit kalsın
   }
 
   shopSearch?.addEventListener('input', () => {
